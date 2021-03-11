@@ -9,7 +9,7 @@ import (
 
 // Filter is the representation of the bloom filter
 type Filter struct {
-	bitset  []byte
+	Bitset  []byte
 	hashers []hash.Hash32
 	m       uint32 /* length of the filter in bits */
 }
@@ -47,7 +47,7 @@ func (f *Filter) Add(item []byte) {
 	for _, v := range hashes {
 		pos := v % f.m
 		idx, offset := (pos / 8), (pos % 8)
-		f.bitset[idx] |= (1 << offset)
+		f.Bitset[idx] |= (1 << offset)
 	}
 }
 
@@ -58,7 +58,7 @@ func (f *Filter) Check(item []byte) bool {
 	for _, v := range hashes {
 		pos := v % f.m
 		idx, offset := (pos / 8), (pos % 8)
-		if f.bitset[idx]&(1<<offset) != 0 {
+		if f.Bitset[idx]&(1<<offset) != 0 {
 			exists++
 		}
 	}
