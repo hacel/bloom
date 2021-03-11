@@ -25,7 +25,7 @@ func max(x, y uint32) uint32 {
 func New(m uint32) *Filter {
 	m = max(1, m)
 	return &Filter{
-		make([]byte, max(1, 1+(m-1)/8)),
+		make([]byte, 1+(m-1)/8),
 		[]hash.Hash32{fnv.New32(), murmur3.New32()},
 		m,
 	}
